@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:900i&display=swap');
+
+h1 {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 5vw;
+	letter-spacing:0.1em;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+  color: white;
+  text-shadow:
+						1px 1px #4EB1D9,
+						2px 2px #000000;
+}
+
+footer {
+  position: static;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: transparent;
+  text-align: center;
+  height: 2.5rem;
+  /*position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;   */         /* Footer height */
+}
+
+p {
+  text-align: center;
+}
+
+body {
+  height: 100%;
+  block-size: 100%;
+  min-height:100vh;
+  font-family: 'Montserrat', sans-serif;
+}
+
+img {
+  float: center;
+  width: 30vw;
+  height: 25vw;
+  object-fit: scale-down;
+}
+
+button {
+  float: center;
+  color: black;
+  text-align: center;
+  padding: 4px;
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the active/current link*/
+button.active {
+  background-color: dodgerblue;
+}
+
+#gameCont{
+  display: flex;
+  float: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  block-size: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+.game{
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  float: center;
+  block-size: 100%;
+  align-items: center;
+  flex-direction: column;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+.center {
+  width: 50%;
+}
+
+.header {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 20px 10px;
+}
+
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  color: #ff1f8f;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 45px;
+  line-height: 25px;
+  border-radius: 4px;
+  letter-spacing:0.1em;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+  color: white;
+  text-shadow:
+						2px 2px #4EB1D9,
+						4px 4px #000000;
+}
+
+.header button {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+/* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
+.header v.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+/* Change the background color on mouse-over */
+.header button:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the active/current link*/
+.header button.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+/* Float the link section to the right */
+.header-right {
+  float: right;
+}
+
+/* The Modal (background) */
+.modal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #f1f1f1;
+  margin: 10% auto; /* 10% from the top and centered */
+  padding: 20px;
+  border: 2px solid #888;
+  width: 75%; /* Could be more or less, depending on screen size */
+  text-align: center;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/*LeaderBoard Table Defs */
+.tableFixHeadLB {
+  overflow-y: auto;
+  height: 60vh;
+}
+.tableFixHeadLB thead th {
+  position: sticky;
+  top: 0;
+}
+/*Table Defs */
+.tableFixHead {
+  overflow-y: auto;
+  height: 30vh;
+}
+.tableFixHead thead th {
+  position: sticky;
+  top: 0;
+}
+table {
+  border-collapse: collapse;
+  table-layout: fixed ;
+  width: 100%;
+}
+th,
+td {
+  padding: 1vh 1vh;
+  align-items: center;
+}
+th {
+  background: #eee;
+}
+.tableFixHead,
+.tableFixHead td {
+  box-shadow: inset 1px -1px #000;
+}
+.tableFixHead th {
+  box-shadow: inset 1px 1px #000, 0 1px #000;
+}
+.tableFixHeadLB,
+.tableFixHeadLB td {
+  box-shadow: inset 1px -1px #000;
+}
+.tableFixHeadLB th {
+  box-shadow: inset 1px 1px #000, 0 1px #000;
+}
