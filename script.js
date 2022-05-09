@@ -206,7 +206,7 @@ function initTimer(top, left){
   timer.style.position = "absolute";
   timer.style.top = top;
   timer.style.left = left;
-  timer.style.transform = "translate(-50%, -50%)";
+  timer.style.transform = "translate(-50%, +50%)";
   timer.style.fontSize = "4vw";
   timer.style.letterSpacing = "0.1em";
   timer.style.webkitTextStrokeWidth = "0px";
@@ -298,19 +298,9 @@ rects[1] = new rectButton((midx+(basis/6)), (midy-(basis/6)), basis/4, basis/4, 
 rects[2] = new rectButton((midx+(basis/6)), (midy+(basis/6)), basis/4, basis/4, r, g, b, targets[2]);
 rects[3] = new rectButton((midx-(basis/6)), (midy+(basis/6)), basis/4, basis/4, r, g, b, targets[3]);
 
-//Set up timer
-//Check user platform
-/*f (mobileTest() == true){
-  top = midy;
-  left = "50vw";
-} else {
-  top = "63.4vh";
-  left = "50vw";
-}*/
+//timer size and location
 var head = document.getElementById("header");
-console.log(head.offsetHeight)
-console.log(parent[0].offsetHeight)
-top = (head.offsetHeight + parent[0].offsetHeight)/2 + "px"
+top = (((head.offsetHeight + parent[0].offsetHeight)/2)) + "px";
 left = "50vw";
 
 
