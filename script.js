@@ -300,13 +300,18 @@ rects[3] = new rectButton((midx-(basis/6)), (midy+(basis/6)), basis/4, basis/4, 
 
 //Set up timer
 //Check user platform
-if (mobileTest() == true){
+/*f (mobileTest() == true){
   top = midy;
   left = "50vw";
 } else {
   top = "63.4vh";
   left = "50vw";
-}
+}*/
+var head = document.getElementById("header");
+console.log(head.offsetHeight)
+console.log(parent[0].offsetHeight)
+top = (head.offsetHeight + parent[0].offsetHeight)/2 + "px"
+left = "50vw";
 
 
 //Listen for click/touch events
