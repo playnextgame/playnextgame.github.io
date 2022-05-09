@@ -206,7 +206,7 @@ function initTimer(top, left){
   timer.style.position = "absolute";
   timer.style.top = top;
   timer.style.left = left;
-  timer.style.transform = "translate(-50%, +50%)";
+  timer.style.transform = "translate(-50%, 20%)";
   timer.style.fontSize = "4vw";
   timer.style.letterSpacing = "0.1em";
   timer.style.webkitTextStrokeWidth = "0px";
