@@ -301,7 +301,7 @@ rects[3] = new rectButton((midx-(basis/6)), (midy+(basis/6)), basis/4, basis/4, 
 //Set up timer
 //Check user platform
 if (mobileTest() == true){
-  top = "61vh";
+  top = "55vh";
   left = "50vw";
 } else {
   top = "63.4vh";
