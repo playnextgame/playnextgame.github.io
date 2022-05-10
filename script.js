@@ -153,11 +153,12 @@ function resetGame() {
   r = getRandomInt(255);
   g = getRandomInt(255);
   b = getRandomInt(255);
+  backr = getRandomInt(255);
+  backg = getRandomInt(255);
+  backb = getRandomInt(255);
   textColor = "rgb(" + [r,g,b].join() + ")";
   shadowColor = "rgb(" + [r*(0.8),g*(0.8),b*(0.8)].join() + ")";
-  backgroundColor = "rgb(" + [getRandomInt(255),getRandomInt(255),getRandomInt(255)].join() + ")";
-  var timer = document.getElementById("timer");
-  timer.style.textShadow = "2px 2px " + textColor + ", 4px 4px " + shadowColor + "";
+  backgroundColor = "rgb(" + [backr,backg,backb].join() + ")";
   first = true;
   correct = false;
 
@@ -187,32 +188,16 @@ async function timer(){
   var downloadTimer = setInterval(function(){
   if(timeleft <= 0){
     clearInterval(downloadTimer);
-    document.getElementById("timer").innerHTML = "0";
+    //document.getElementById("timer").innerHTML = "0";
     gameOverText.innerHTML = "Your Score: " + score;
     gameOverModal.style.display = "block";
     DoExampleLoginWithCustomID()
     console.log(score);
   } else {
-    document.getElementById("timer").innerHTML = timeleft;
+    //document.getElementById("timer").innerHTML = timeleft;
   }
   timeleft -= 1;
   }, 1000);
-}
-
-function initTimer(top, left){
-  var timer = document.getElementById("timer");
-  timer.innerHTML = "15";
-  timer.style.textAlign = "center";
-  timer.style.position = "absolute";
-  timer.style.top = top;
-  timer.style.left = left;
-  timer.style.transform = "translate(-50%, 20%)";
-  timer.style.fontSize = "4vw";
-  timer.style.letterSpacing = "0.1em";
-  timer.style.webkitTextStrokeWidth = "0px";
-  timer.style.webkitTextFillColor = "transparent";
-  //timer.style.webkitTextStrokeColor = "white";
-  timer.style.textShadow = "2px 2px " + textColor + ", 4px 4px " + shadowColor + "";
 }
 
 class x{
@@ -256,7 +241,10 @@ let gameActive = true;
 let first = true;
 let correct = false;
 let custId = getRandomInt(1000000000000000000).toString();
-let backgroundColor = "rgb(" + [getRandomInt(255),getRandomInt(255),getRandomInt(255)].join() + ")";
+let backr = getRandomInt(255);
+let backg = getRandomInt(255);
+let backb = getRandomInt(255);
+let backgroundColor = "rgb(" + [backr,backg,backb].join() + ")";
 let r = getRandomInt(255);
 let g = getRandomInt(255);
 let b = getRandomInt(255);
@@ -272,6 +260,8 @@ let left = "";
 const context = document.querySelector("canvas").getContext("2d");
 context.width = document.body.clientWidth;
 context.height = document.body.clientHeight;
+context.fontFamily = "Secular One, sans-serif";
+
 
 if(context.width > context.height){
   var basis = context.height;
@@ -300,7 +290,7 @@ rects[3] = new rectButton((midx-(basis/6)), (midy+(basis/6)), basis/4, basis/4, 
 
 //timer size and location
 var head = document.getElementById("header");
-top = (((head.offsetHeight + parent[0].offsetHeight)/2)) + "px";
+top = (((head.offsetHeight + parent[0].offsetHeight)/2)) + "px"
 left = "50vw";
 
 
@@ -320,7 +310,7 @@ const controller = {
               } else {
                 exes[exes.length] = new x(event.offsetX, event.offsetY);
                 timeleft--;
-                document.getElementById("timer").innerHTML = timeleft;
+
               }
             }
             if(event.offsetY > (midy+(basis/6)) && (event.offsetY < (midy+(basis/6) + basis/4))){
@@ -331,7 +321,6 @@ const controller = {
               } else {
                 exes[exes.length] = new x(event.offsetX, event.offsetY);
                 timeleft--;
-                document.getElementById("timer").innerHTML = timeleft;
               }
             }
           }
@@ -344,7 +333,6 @@ const controller = {
               } else {
                 exes[exes.length] = new x(event.offsetX, event.offsetY);
                 timeleft--;
-                document.getElementById("timer").innerHTML = timeleft;
               }
             }
             if(event.offsetY > (midy+(basis/6)) && (event.offsetY < (midy+(basis/6) + basis/4))){
@@ -355,7 +343,6 @@ const controller = {
               } else {
                 exes[exes.length] = new x(event.offsetX, event.offsetY);
                 timeleft--;
-                document.getElementById("timer").innerHTML = timeleft;
               }
             }
           }
@@ -366,11 +353,18 @@ const controller = {
 };
 
 //Main game loop logic
+console.log(midx, midy)
 const loop = function () {
 
   // Creates the backdrop for each frame
   context.fillStyle = backgroundColor;
   context.fillRect(0, 0, context.width, context.height); // x, y, width, height
+
+  context.fillStyle = "rgb(" + [backr*(0.8),backg*(0.8),backb*(0.8)].join() + ")";
+  context.font = "130vw Coiny";
+  let meas = context.measureText(timeleft);
+  let fontHeight = meas.fontBoundingBoxAscent + meas.fontBoundingBoxDescent;
+  context.fillText(timeleft, (((midx + basis/6 + basis/4) + (midx - basis/6))/2) - (meas.width/2), (((midy + basis/6 + basis/4) + midy - basis/4)/2) + (10));
 
   for (var i = 0; i < rects.length; i++){
     context.beginPath();
@@ -387,12 +381,25 @@ const loop = function () {
     context.stroke();
   }
   for (var i = 0; i < exes.length; i++){
-    context.font = "10vw Arial";
+    context.beginPath();
+    context.font = "10vw Coiny";
     context.fillStyle = "red";
     context.textAlign="center";
     context.textBaseline = "middle";
     context.fillText("X", exes[i].x, exes[i].y);
+    context.closePath();
   }
+
+  context.fillStyle = "rgb(" + [r,g,b].join() + ")";
+  context.textAlign="left";
+  context.textBaseline = "middle";
+  context.font = "10vw Coiny";
+  context.strokeColor="rgb(" + [r*(0.8),g*(0.8),b*(0.8)].join() + ")";;
+  context.lineWidth=2;
+  meas = context.measureText(timeleft);
+  context.fillText(timeleft, (((midx + basis/6 + basis/4) + (midx - basis/6))/2) - (meas.width/2), (((midy + basis/6 + basis/4) + midy - basis/6)/2) + (5));
+  context.strokeText(timeleft, (((midx + basis/6 + basis/4) + (midx - basis/6))/2) - (meas.width/2), (((midy + basis/6 + basis/4) + midy - basis/6)/2) + (5));
+
   window.requestAnimationFrame(loop);
 
 };
@@ -417,7 +424,6 @@ var playButton = document.getElementById("playButton");
 // When the user clicks on the button, close the modal
 playButton.onclick = function() {
   gameActive = true;
-  initTimer(top, left);
   timer()
   modal.style.display = "none";
 }

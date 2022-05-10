@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:900i&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:900i&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Coiny&display=swap');
 
 h1 {
   text-align: center;
@@ -72,8 +74,9 @@ button.active {
   background-color: dodgerblue;
 }
 
-#gameCont{
+.gameCont{
   display: flex;
+  position: relative,
   float: center;
   align-items: center;
   flex-direction: column;
