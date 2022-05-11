@@ -48,31 +48,38 @@ var updateNameCallback = function (result, error) {
 
 var leaderboardButtonCallback = function (result, error) {
   if (result !== null) {
-     console.log("lead button callback")
-     var board = result.data.Leaderboard;
-     var leaderboard = document.getElementById("leaderboardButton");
-     for(var i = 0; i < board.length; i++){
-       var trow = document.createElement("tr");
-       var score = document.createElement("td");
-       score.innerHTML = board[i].StatValue;
-       var name = document.createElement("td");
-       var scrollDiv = document.createElement("div");
-       scrollDiv.style.width = "20vw";
-       scrollDiv.style.overflowX = "auto";
-       name.style.alignItems = "center";
-       name.style.textAlign = "center";
-       scrollDiv.style.alignItems = "center";
-       scrollDiv.style.textAlign = "left";
-       scrollDiv.innerHTML = board[i].DisplayName;
-       var rank = document.createElement("td");
-       rank.innerHTML = parseInt(board[i].Position) + 1;
-
-       leaderboard.appendChild(trow);
-       trow.appendChild(rank);
-       trow.appendChild(name);
-       name.appendChild(scrollDiv)
-       trow.appendChild(score);
-     }
+    console.log("lead callback")
+    for(var i = 0; i < result.data.Leaderboard.length; i++){
+      lbButtonArray.push(result.data.Leaderboard[i]);
+    }
+    if (result.data.Leaderboard.length <= 100){
+      var leaderboard = document.getElementById("leaderboardButton");
+      for(var i = 0; i < lbButtonArray.length; i++){
+        var trow = document.createElement("tr");
+        var score = document.createElement("td");
+        score.innerHTML = lbButtonArray[i].StatValue;
+        var name = document.createElement("td");
+        var scrollDiv = document.createElement("div");
+        scrollDiv.style.width = "20vw";
+        scrollDiv.style.overflowX = "auto";
+        name.style.alignItems = "center";
+        name.style.textAlign = "center";
+        scrollDiv.style.alignItems = "center";
+        scrollDiv.style.textAlign = "left";
+        scrollDiv.innerHTML = lbButtonArray[i].DisplayName;
+        var rank = document.createElement("td");
+        rank.innerHTML = parseInt(lbButtonArray[i].Position) + 1;
+        leaderboard.appendChild(trow);
+        trow.appendChild(rank);
+        trow.appendChild(name);
+        name.appendChild(scrollDiv)
+        trow.appendChild(score);
+      }
+    }else{
+      playerNum = parseInt(playerNum) + 100;
+      var leaderboardReq = { StartPosition: playerNum, StatisticName: "Score", MaxResultsCount: 100, CustomId: custId };
+      PlayFabClientSDK.GetLeaderboard(leaderboardReq, leaderboardButtonCallback);
+    }
   } else if (error !== null) {
       console.log("Here's some debug information:\n")
       console.log(error);
@@ -81,7 +88,7 @@ var leaderboardButtonCallback = function (result, error) {
 
 var LeaderboardLoginCallback = function (result, error) {
     if (result !== null) {
-      var leaderboardReq = { StartPosition: 0, StatisticName: "Score", MaxResultsCount: 100, CustomId: custId };
+      var leaderboardReq = { StartPosition: playerNum, StatisticName: "Score", MaxResultsCount: 100, CustomId: custId };
       PlayFabClientSDK.GetLeaderboard(leaderboardReq, leaderboardButtonCallback);
 
     } else if (error !== null) {
@@ -96,31 +103,38 @@ var LoginCallback = function (result, error) {
   var leaderboardCallback = function (result, error) {
     if (result !== null) {
        console.log("lead callback")
+       for(var i = 0; i < result.data.Leaderboard.length; i++){
+         lbButtonArray.push(result.data.Leaderboard[i]);
+       }
+       if (result.data.Leaderboard.length <= 100){
+         var leaderboard = document.getElementById("leaderboard");
+         for(var i = 0; i < lbButtonArray.length; i++){
+           console.log(lbButtonArray[i])
+           var trow = document.createElement("tr");
+           var score = document.createElement("td");
+           score.innerHTML = lbButtonArray[i].StatValue;
+           var name = document.createElement("td");
+           var scrollDiv = document.createElement("div");
+           scrollDiv.style.width = "20vw";
+           scrollDiv.style.overflowX = "auto";
+           name.style.alignItems = "center";
+           name.style.textAlign = "center";
+           scrollDiv.style.alignItems = "center";
+           scrollDiv.style.textAlign = "left";
+           scrollDiv.innerHTML = lbButtonArray[i].DisplayName;
+           var rank = document.createElement("td");
+           rank.innerHTML = parseInt(lbButtonArray[i].Position) + 1;
 
-       var board = result.data.Leaderboard;
-       var leaderboard = document.getElementById("leaderboard");
-       for(var i = 0; i < board.length; i++){
-
-         var trow = document.createElement("tr");
-         var score = document.createElement("td");
-         score.innerHTML = board[i].StatValue;
-         var name = document.createElement("td");
-         var scrollDiv = document.createElement("div");
-         scrollDiv.style.width = "20vw";
-         scrollDiv.style.overflowX = "auto";
-         name.style.alignItems = "center";
-         name.style.textAlign = "center";
-         scrollDiv.style.alignItems = "center";
-         scrollDiv.style.textAlign = "left";
-         scrollDiv.innerHTML = board[i].DisplayName;
-         var rank = document.createElement("td");
-         rank.innerHTML = parseInt(board[i].Position) + 1;
-
-         leaderboard.appendChild(trow);
-         trow.appendChild(rank);
-         trow.appendChild(name);
-         name.appendChild(scrollDiv)
-         trow.appendChild(score);
+           leaderboard.appendChild(trow);
+           trow.appendChild(rank);
+           trow.appendChild(name);
+           name.appendChild(scrollDiv)
+           trow.appendChild(score);
+         }
+       }else{
+         playerNum = parseInt(playerNum) + 100;
+         var leaderboardReq = { StartPosition: playerNum, StatisticName: "Score", MaxResultsCount: 100, CustomId: custId };
+         PlayFabClientSDK.GetLeaderboard(leaderboardReq, leaderboardButtonCallback);
        }
     } else if (error !== null) {
         console.log("Here's some debug information:\n")
@@ -257,6 +271,8 @@ let shadowColor = "rgb(" + [r*(0.8),g*(0.8),b*(0.8)].join() + ")";
 let rects = [];
 let top = "";
 let left = "";
+let lbButtonArray = [];
+let playerNum = 0;
 const context = document.querySelector("canvas").getContext("2d");
 context.width = document.body.clientWidth;
 context.height = document.body.clientHeight;
@@ -450,7 +466,7 @@ window.onclick = function(event) {
   }
   if (event.target.id == "lbbutton") {
     var leaderboardReq = { StartPosition: 0, StatisticName: "Score", MaxResultsCount: 100, CustomId: custId };
-    if (populatelb ==  true){
+    if (populatelb == true){
       LoginLeaderboard();
     }
     populatelb = false;
