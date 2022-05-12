@@ -35,6 +35,7 @@ var updateStatsCallback = function (result, error) {
     window.location.reload();
   } else if (error !== null) {
       console.log("Here's some debug information:\n")
+      console.log(error);
   }
 };
 var updateNameCallback = function (result, error) {
@@ -109,7 +110,6 @@ var LoginCallback = function (result, error) {
        if (result.data.Leaderboard.length <= 100){
          var leaderboard = document.getElementById("leaderboard");
          for(var i = 0; i < lbButtonArray.length; i++){
-           console.log(lbButtonArray[i])
            var trow = document.createElement("tr");
            var score = document.createElement("td");
            score.innerHTML = lbButtonArray[i].StatValue;
@@ -150,13 +150,6 @@ var LoginCallback = function (result, error) {
     } else if (error !== null) {
       console.log(error);
     }
-}
-
-//Return date in mm/dd/yyyy format
-function GetFormattedDate() {
-    var d = new Date();
-    var datestring = (d.getMonth()+1)  + "/" + d.getDate() + "/" + d.getFullYear()
-    return datestring;
 }
 
 // Reset squares when correct is picked
@@ -206,7 +199,6 @@ async function timer(){
     gameOverText.innerHTML = "Your Score: " + score;
     gameOverModal.style.display = "block";
     DoExampleLoginWithCustomID()
-    console.log(score);
   } else {
     //document.getElementById("timer").innerHTML = timeleft;
   }
@@ -369,7 +361,6 @@ const controller = {
 };
 
 //Main game loop logic
-console.log(midx, midy)
 const loop = function () {
 
   // Creates the backdrop for each frame
@@ -452,7 +443,11 @@ window.onclick = function(event) {
 
   }
   if (event.target.id == "submitButton") {
-    let name = document.forms["form"]["fname"].value;
+    //let name = document.forms["form"]["fname"].value;
+    //let nameCheck = "https://www.purgomalum.com/service/containsprofanity?text=shit";
+    //fetch(nameCheck).then(function(response) {
+    //    console.log(response.result)
+    //});
     var updateStatsRequest = { Statistics: [{ StatisticName: "Score", Value: score }]};
     var updateNameRequest = {DisplayName: name};
     PlayFabClientSDK.UpdateUserTitleDisplayName(updateNameRequest, updateNameCallback);
@@ -475,5 +470,10 @@ window.onclick = function(event) {
   }
 }
 
+let testname = "shit";
+let testnameCheck = "https://www.purgomalum.com/service/containsprofanity?text=" + name;
+fetch(testnameCheck).then(function(response) {
+   console.log(response)
+});
 // Start animation loop
 window.requestAnimationFrame(loop);
