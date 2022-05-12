@@ -443,15 +443,17 @@ window.onclick = function(event) {
 
   }
   if (event.target.id == "submitButton") {
-    //let name = document.forms["form"]["fname"].value;
-    //let nameCheck = "https://www.purgomalum.com/service/containsprofanity?text=shit";
-    //fetch(nameCheck).then(function(response) {
-    //    console.log(response.result)
-    //});
-    var updateStatsRequest = { Statistics: [{ StatisticName: "Score", Value: score }]};
-    var updateNameRequest = {DisplayName: name};
-    PlayFabClientSDK.UpdateUserTitleDisplayName(updateNameRequest, updateNameCallback);
-    PlayFabClientSDK.UpdatePlayerStatistics(updateStatsRequest, updateStatsCallback);
+    let name = document.forms["form"]["fname"].value;
+    let nameCheck = "https://www.purgomalum.com/service/json?text=" + name;
+    fetch(nameCheck).then(function(response) {
+      response.json().then(function(result){
+        name = result.result;
+        var updateStatsRequest = { Statistics: [{ StatisticName: "Score", Value: score }]};
+        var updateNameRequest = {DisplayName: name};
+        PlayFabClientSDK.UpdateUserTitleDisplayName(updateNameRequest, updateNameCallback);
+        PlayFabClientSDK.UpdatePlayerStatistics(updateStatsRequest, updateStatsCallback);
+      })
+    });
   }
   if (event.target.id == "playAgain") {
     var updateStatsRequest = { Statistics: [{ StatisticName: "Score", Value: score }]};
@@ -470,10 +472,5 @@ window.onclick = function(event) {
   }
 }
 
-let testname = "shit";
-let testnameCheck = "https://www.purgomalum.com/service/containsprofanity?text=" + testname;
-fetch(testnameCheck).then(function(response) {
-   console.log(response)
-});
 // Start animation loop
 window.requestAnimationFrame(loop);
