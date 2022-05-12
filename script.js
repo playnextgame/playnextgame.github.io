@@ -471,7 +471,7 @@ window.onclick = function(event) {
 }
 
 let testname = "shit";
-let testnameCheck = "https://www.purgomalum.com/service/containsprofanity?text=" + name;
+let testnameCheck = "https://www.purgomalum.com/service/containsprofanity?text=" + testname;
 fetch(testnameCheck).then(function(response) {
    console.log(response)
 });
