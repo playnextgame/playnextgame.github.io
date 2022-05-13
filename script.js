@@ -134,7 +134,7 @@ var LoginCallback = function (result, error) {
        }else{
          playerNum = parseInt(playerNum) + 100;
          var leaderboardReq = { StartPosition: playerNum, StatisticName: "Score", MaxResultsCount: 100, CustomId: custId };
-         PlayFabClientSDK.GetLeaderboard(leaderboardReq, leaderboardButtonCallback);
+         PlayFabClientSDK.GetLeaderboard(leaderboardReq, leaderboardCallback);
        }
     } else if (error !== null) {
         console.log("Here's some debug information:\n")
