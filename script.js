@@ -107,7 +107,7 @@ var LoginCallback = function (result, error) {
        for(var i = 0; i < result.data.Leaderboard.length; i++){
          lbButtonArray.push(result.data.Leaderboard[i]);
        }
-       if (result.data.Leaderboard.length <= 100){
+       if (result.data.Leaderboard.length <= 99){
          var leaderboard = document.getElementById("leaderboard");
          for(var i = 0; i < lbButtonArray.length; i++){
            var trow = document.createElement("tr");
