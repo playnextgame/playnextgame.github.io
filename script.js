@@ -317,7 +317,9 @@ const controller = {
                 resetGame()
               } else {
                 exes[exes.length] = new x(event.offsetX, event.offsetY);
-                timeleft--;
+                if (timeleft > 0){
+                  timeleft--;
+                }
 
               }
             }
@@ -328,7 +330,9 @@ const controller = {
                 resetGame()
               } else {
                 exes[exes.length] = new x(event.offsetX, event.offsetY);
-                timeleft--;
+                if (timeleft > 0){
+                  timeleft--;
+                }
               }
             }
           }
@@ -340,7 +344,9 @@ const controller = {
                 resetGame()
               } else {
                 exes[exes.length] = new x(event.offsetX, event.offsetY);
-                timeleft--;
+                if (timeleft > 0){
+                  timeleft--;
+                }
               }
             }
             if(event.offsetY > (midy+(basis/6)) && (event.offsetY < (midy+(basis/6) + basis/4))){
@@ -350,7 +356,9 @@ const controller = {
                 resetGame()
               } else {
                 exes[exes.length] = new x(event.offsetX, event.offsetY);
-                timeleft--;
+                if (timeleft > 0){
+                  timeleft--;
+                }
               }
             }
           }
@@ -437,23 +445,23 @@ playButton.onclick = function() {
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-    gameActive = true;
-
-  }
   if (event.target.id == "submitButton") {
     let name = document.forms["form"]["fname"].value;
-    let nameCheck = "https://www.purgomalum.com/service/json?text=" + name;
-    fetch(nameCheck).then(function(response) {
-      response.json().then(function(result){
-        name = result.result;
-        var updateStatsRequest = { Statistics: [{ StatisticName: "Score", Value: score }]};
-        var updateNameRequest = {DisplayName: name};
-        PlayFabClientSDK.UpdateUserTitleDisplayName(updateNameRequest, updateNameCallback);
-        PlayFabClientSDK.UpdatePlayerStatistics(updateStatsRequest, updateStatsCallback);
-      })
-    });
+    if(name.length > 20){
+      window.alert("Max username length is 20 characters. Please sbmit a new username.");
+      document.getElementById('namebox').value = "";
+    } else{
+      let nameCheck = "https://www.purgomalum.com/service/json?text=" + name;
+      fetch(nameCheck).then(function(response) {
+        response.json().then(function(result){
+          name = result.result;
+          var updateStatsRequest = { Statistics: [{ StatisticName: "Score", Value: score }]};
+          var updateNameRequest = {DisplayName: name};
+          PlayFabClientSDK.UpdateUserTitleDisplayName(updateNameRequest, updateNameCallback);
+          PlayFabClientSDK.UpdatePlayerStatistics(updateStatsRequest, updateStatsCallback);
+        })
+      });
+    }
   }
   if (event.target.id == "playAgain") {
     var updateStatsRequest = { Statistics: [{ StatisticName: "Score", Value: score }]};
@@ -462,6 +470,7 @@ window.onclick = function(event) {
     PlayFabClientSDK.UpdatePlayerStatistics(updateStatsRequest, updateStatsCallback);
   }
   if (event.target.id == "lbbutton") {
+    modal.style.display = "none";
     var leaderboardReq = { StartPosition: 0, StatisticName: "Score", MaxResultsCount: 100, CustomId: custId };
     if (populatelb == true){
       LoginLeaderboard();

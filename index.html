@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Next</title>
+    <!-- Set up favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/favicons/site.webmanifest">
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
     <link rel="stylesheet"/>
@@ -25,7 +30,7 @@
     <div class="modal-content">
       <!--<span class="close">&times;</span>-->
       <h2>Next</h2>
-      <p>Welcome! Your goal is to make it through as many rounds as possible. </br></br> Each round, four squares are shown, one of which is slightly different than the others. </br></br>Find and click the different square to move on to the next round. Incorrect guesses stop you from advancing and take a second off of your remaining time. </br></br> Good luck!</p>
+      <p>Welcome! Your goal is to make it through as many rounds as possible. </br></br> Each round, four squares are shown, one of which is slightly darker than the others. </br></br>Find and click the darker square to move on to the next round. Incorrect guesses stop you from advancing and take a second off of your remaining time. </br></br> Good luck!</p>
       <h1>
         <button id="playButton">Play</button>
         <button id="lbbutton">Leader Board</button>
@@ -55,7 +60,7 @@
       <p>Enter your name to submit your score to the leaderboard:</p>
       <p>
         <form id="form" action="Submit">
-          Name: <input type="text" name="fname"><br><br><br>
+          Name: <input id="namebox" type="text" name="fname"><br><br><br>
           <input type="button" value="Submit" id="submitButton">
           <input type="button" value="Play Again" id="playAgain">
         </form>
